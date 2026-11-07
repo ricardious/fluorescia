@@ -39,15 +39,16 @@ Mejoras permanentes (clones iniciales, duración de mutaciones, lianas débiles,
 
 ## Reglas del reto
 
-- **≤ 32 KB:** el juego completo es un único `index.html` (~31 KB sin comprimir). El script de build falla si se pasa.
+- **≤ 32 KB:** el juego completo es un único `index.html` de ~24 KB, que es exactamente lo que descarga el navegador. El build falla si se pasa.
+- **Compresor propio:** `pack.mjs` es un compresor LZ77 escrito para este proyecto (parseo óptimo, salida en texto ASCII). El `index.html` lleva un descompresor de ~400 bytes, también propio, que reconstruye el código y lo ejecuta. El build verifica que se reconstruya byte a byte.
 - **Código propio:** JavaScript puro con Canvas 2D y Web Audio. Sin librerías, frameworks ni motores.
-- **Cero assets:** los gráficos (pixel art, fuente 3×5, iluminación) y el sonido (efectos, dron y música generativa) se crean con código.
+- **Cero assets:** los gráficos (pixel art, fondos en capas con parallax, texturas de piedra, iluminación dinámica con bloom, fuente 3×5) y el sonido (efectos, dron y música generativa) se crean con código.
 
 ## Desarrollo
 
 ```bash
 npm install      # solo instala terser (minificador, en build)
-npm run build    # src/ → index.html (y comprueba el límite de 32 KB)
+npm run build    # src/ → minifica → empaqueta → index.html (y comprueba el límite de 32 KB)
 ```
 
 El código fuente legible está en `src/game.js`; `index.html` en la raíz es el build que se publica en GitHub Pages.
