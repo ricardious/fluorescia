@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { minify } from 'terser';
 
 const js = readFileSync('src/game.js', 'utf8');
-const html = readFileSync('src/index.html', 'utf8');
+const html = readFileSync('src/shell.html', 'utf8');
 const out = await minify(js, {
   ecma: 2020, toplevel: true,
   compress: { passes: 3, unsafe: true, unsafe_arrows: true, pure_getters: true },
